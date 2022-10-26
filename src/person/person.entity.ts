@@ -1,7 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn, Repository } from 'typeorm';
 
+import { PersonEntityInterface } from './person.interface';
+
 @Entity('person')
-export class PersonEntity {
+export class PersonEntity implements PersonEntityInterface {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
