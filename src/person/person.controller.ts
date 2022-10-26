@@ -1,4 +1,4 @@
-import { Controller, Body, Param, Post, Patch } from '@nestjs/common';
+import { Controller, Body, Param, Post, Patch, Delete } from '@nestjs/common';
 
 import { IdDTO, CreateDTO } from './person.dto';
 import { PersonService } from './person.service';
@@ -17,5 +17,10 @@ export class PersonController {
   async update(@Param() { id }: IdDTO, @Body() body: CreateDTO) {
     const person = await this.personService.update(id, body);
     return person;
+  }
+
+  @Delete(':id')
+  async remove(@Param() { id }: IdDTO) {
+    return this.personService.remove(id);
   }
 }

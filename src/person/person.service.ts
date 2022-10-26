@@ -25,4 +25,13 @@ export class PersonService {
 
     return updated;
   }
+
+  async remove(id: number) {
+    const person = await this.personRepository.findOne({ where: { id } });
+    if (!person) return false;
+
+    await this.personRepository.delete(id);
+
+    return true;
+  }
 }
