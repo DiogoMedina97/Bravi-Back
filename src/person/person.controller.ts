@@ -1,9 +1,21 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Body, Param, Post, Patch } from '@nestjs/common';
+
+import { IdDTO, CreateDTO } from './person.dto';
+import { PersonService } from './person.service';
 
 @Controller('person')
 export class PersonController {
-  @Get('')
-  find() {
-    return {};
+  constructor(private readonly personService: PersonService) {}
+
+  @Post('')
+  async create(@Body() body: CreateDTO) {
+    const person = await this.personService.create(body);
+    return person;
+  }
+
+  @Patch(':id')
+  async update(@Param() { id }: IdDTO, @Body() body: CreateDTO) {
+    const person = await this.personService.update(id, body);
+    return person;
   }
 }

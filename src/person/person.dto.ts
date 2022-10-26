@@ -1,8 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsString } from 'class-validator';
+import { IsString, IsInt } from 'class-validator';
 
 import { PersonEntityInterface } from './person.interface';
+
+export class IdDTO {
+  @ApiProperty()
+  @IsInt()
+  readonly id: number;
+}
 
 class CreateUpdateDTO implements Partial<PersonEntityInterface> {
   @ApiProperty()
