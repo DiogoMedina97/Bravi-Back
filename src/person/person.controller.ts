@@ -1,4 +1,12 @@
-import { Controller, Body, Param, Post, Patch, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Body,
+  Param,
+  Get,
+  Post,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 
 import { IdDTO, CreateDTO } from './person.dto';
 import { PersonService } from './person.service';
@@ -6,6 +14,12 @@ import { PersonService } from './person.service';
 @Controller('person')
 export class PersonController {
   constructor(private readonly personService: PersonService) {}
+
+  @Get('')
+  async findById(@Param() { id }: IdDTO) {
+    const person = await this.personService.findById(id);
+    return person;
+  }
 
   @Post('')
   async create(@Body() body: CreateDTO) {

@@ -10,6 +10,16 @@ export class PersonService {
     private readonly personRepository: PersonRepository,
   ) {}
 
+  async findById(id: number) {
+    const person = await this.personRepository.findOne({
+      where: { id },
+      relations: ['contacts'],
+    });
+    if (!person) return undefined;
+
+    return person;
+  }
+
   async create(dto: CreateDTO) {
     const person = new PersonEntity(dto);
     const saved = await this.personRepository.save(person);
