@@ -15,6 +15,12 @@ import { PersonService } from './person.service';
 export class PersonController {
   constructor(private readonly personService: PersonService) {}
 
+  @Get('')
+  async find() {
+    const people = await this.personService.find();
+    return people;
+  }
+
   @Get(':id')
   async findById(@Param() { id }: IdDTO) {
     const person = await this.personService.findById(id);

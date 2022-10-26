@@ -10,6 +10,15 @@ export class PersonService {
     private readonly personRepository: PersonRepository,
   ) {}
 
+  async find() {
+    const people = await this.personRepository.find({
+      relations: ['contacts'],
+    });
+    if (!people) return [];
+
+    return people;
+  }
+
   async findById(id: number) {
     const person = await this.personRepository.findOne({
       where: { id },
