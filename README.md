@@ -38,4 +38,4 @@ SQL_DATABASE=bravi
 
 ## Executar
 - 1) Rodar `npm install`
-- 1) Rodar `npm start`
+- 2) Rodar `npm start`
