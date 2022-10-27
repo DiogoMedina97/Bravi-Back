@@ -16,9 +16,6 @@ export class ContactEntity implements ContactEntityInterface {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ type: 'int', nullable: false })
-  id_person: number;
-
   @Column({ type: 'varchar', nullable: false })
   type: string;
 
