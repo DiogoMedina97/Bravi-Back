@@ -22,7 +22,11 @@ export class ContactEntity implements ContactEntityInterface {
   @Column({ type: 'varchar', nullable: false })
   value: string;
 
-  @ManyToOne(() => PersonEntity, (person) => person.contacts)
+  @ManyToOne(() => PersonEntity, (person) => person.contacts, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    orphanedRowAction: 'delete',
+  })
   @JoinColumn({ name: 'id_person' })
   person: PersonEntity;
 }
