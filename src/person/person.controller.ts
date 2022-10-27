@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 
-import { IdDTO, CreateDTO } from './person.dto';
+import { IdDTO, CreateDTO, UpdateDTO } from './person.dto';
 import { PersonService } from './person.service';
 
 @Controller('person')
@@ -34,7 +34,7 @@ export class PersonController {
   }
 
   @Patch(':id')
-  async update(@Param() { id }: IdDTO, @Body() body: CreateDTO) {
+  async update(@Param() { id }: IdDTO, @Body() body: UpdateDTO) {
     const person = await this.personService.update(id, body);
     return person;
   }

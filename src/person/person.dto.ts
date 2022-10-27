@@ -1,8 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsString, IsInt } from 'class-validator';
+import { IsString, IsInt, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 
 import { PersonEntityInterface } from './person.interface';
+
+import {
+  CreateDTO as ContactCreateDTO,
+  UpdateDTO as ContactUpdateDTO,
+} from '../contact/contact.dto';
 
 export class IdDTO {
   @ApiProperty()
@@ -20,5 +26,18 @@ class CreateUpdateDTO implements Partial<PersonEntityInterface> {
   readonly surname: string;
 }
 
-export class CreateDTO extends CreateUpdateDTO {}
-export class UpdateDTO extends CreateUpdateDTO {}
+export class CreateDTO extends CreateUpdateDTO {
+  @ApiProperty()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ContactCreateDTO)
+  readonly contacts: ContactCreateDTO[];
+}
+
+export class UpdateDTO extends CreateUpdateDTO {
+  @ApiProperty()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ContactUpdateDTO)
+  readonly contacts: ContactUpdateDTO[];
+}
